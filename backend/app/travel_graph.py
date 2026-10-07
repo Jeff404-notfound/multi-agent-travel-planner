@@ -51,7 +51,10 @@ def budget_node(state: TravelState):
         for activity in state["activities"].activities
     )
 
-    selected_stay = state["stays"].stays[0]
+    selected_stay = min(
+    state["stays"].stays,
+    key=lambda stay: stay.total_cost
+    )
 
     result = budget_agent(
         stay_cost=selected_stay.total_cost,

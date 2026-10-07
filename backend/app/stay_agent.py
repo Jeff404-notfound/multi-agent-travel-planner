@@ -19,7 +19,8 @@ llm = ChatOllama(
     model="qwen3:4b",
     base_url="http://172.30.48.1:11434",
     temperature=0,
-    num_ctx=4096,
+    num_ctx=2048,
+    reasoning=False,
 )
 
 

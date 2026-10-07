@@ -20,7 +20,8 @@ llm = ChatOllama(
     model="qwen3:4b",
     base_url="http://172.30.48.1:11434",
     temperature=0,
-    num_ctx=4096,
+    num_ctx=2048,
+    reasoning=False,
 )
 
 
@@ -35,7 +36,19 @@ Destination: {destination}
 Interests: {interests}
 Trip duration: {days} days
 
-Suggest useful tourist activities for this trip.
+Suggest exactly 4 activities that are relevant to the destination and the user's interests.
+
+
+Rules:
+- Every activity must take place in {destination}.
+- Use generic activity names whenever possible.
+- Do NOT mention specific businesses, restaurants, hotels, resorts, markets, beaches, islands, cities, or attractions by name.
+- Do NOT use locations from another city, state, or country.
+- Do NOT suggest flights, trains, buses, hotels, accommodation, or transportation.
+- If you are uncertain about a specific location, describe the activity generically instead.
+- Use realistic approximate costs in INR.
+- Keep descriptions short and factual.
+- Do not claim live availability or booking information.
 
 For each activity provide:
 - name
@@ -43,9 +56,6 @@ For each activity provide:
 - duration in hours
 - estimated cost in INR
 - short description
-
-Give realistic approximate costs.
-Do not invent live booking availability.
 """
 
     return structured_llm.invoke(prompt)
